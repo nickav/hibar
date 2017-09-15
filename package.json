@@ -1,0 +1,17 @@
+{
+  "name": "hibar",
+  "version": "0.0.1",
+  "description": "The missing set of JavaScript functions",
+  "main": "index.js",
+  "repository": "https://github.com/nickaversano/hibar/issues",
+  "author": "Nick Aversano",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "format":
+      "node_modules/.bin/prettier --single-quote --write --tab-width=2 *.{js,jsx,json,scss}"
+  },
+  "devDependencies": {
+    "prettier": "^1.7.0"
+  }
+}
