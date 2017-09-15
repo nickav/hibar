@@ -9,7 +9,7 @@
   "private": false,
   "scripts": {
     "format":
-      "node_modules/.bin/prettier --single-quote --write --tab-width=2 *.{js,jsx,json,scss}"
+      "node_modules/.bin/prettier --single-quote --write --tab-width=2 --no-semi *.{js,json} **/*{.js,json}"
   },
   "devDependencies": {
     "prettier": "^1.7.0"
