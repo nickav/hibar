@@ -2,7 +2,7 @@
   "name": "hibar",
   "version": "0.0.6",
   "description": "The missing set of JavaScript functions",
-  "main": "lib/index.js",
+  "main": "./lib",
   "repository": "https://github.com/nickaversano/hibar/issues",
   "author": "Nick Aversano",
   "license": "MIT",
@@ -12,7 +12,8 @@
       "yarn f $(git ls-files -c -m | grep '\\.\\(jsx\\?\\|json\\|scss\\)$' | tr '\n' ' ')",
     "f":
       "node_modules/.bin/prettier --single-quote --write --tab-width=2 --no-semi",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "publish": "np"
   },
   "lint-staged": {
     "*.{js,jsx,json,scss}": ["yarn f", "git add"]
