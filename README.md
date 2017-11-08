@@ -40,5 +40,14 @@ const _ = require('hibar')
 console.log(_.math.clamp(0, 1, 2))
 ```
 
+### Development
+
+To publish a new version of the package, install [np][np] then run:
+
+```bash
+np
+```
+
 [prettier]: https://github.com/prettier/prettier
+[np]: https://github.com/sindresorhus/np
 [yarn-install]: https://yarnpkg.com/lang/en/docs/install/

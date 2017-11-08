@@ -8,9 +8,18 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "format": "node_modules/.bin/prettier --single-quote --write --tab-width=2 --no-semi *.{js,json} **/*{.js,json}"
+    "format":
+      "yarn f $(git ls-files -c -m | grep '\\.\\(jsx\\?\\|json\\|scss\\)$' | tr '\n' ' ')",
+    "f":
+      "node_modules/.bin/prettier --single-quote --write --tab-width=2 --no-semi",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx,json,scss}": ["yarn f", "git add"]
   },
   "devDependencies": {
-    "prettier": "^1.7.0"
+    "husky": "^0.14.3",
+    "lint-staged": "^4.3.0",
+    "prettier": "^1.8.1"
   }
 }
