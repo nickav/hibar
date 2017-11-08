@@ -15,7 +15,7 @@ There are two ways of using it:
 ### Polyfill
 
 ```javascript
-require('hibar').polyfill();
+require('hibar/polyfill')();
 console.log(Math.clamp(0, 1, 2))
 ```
 
