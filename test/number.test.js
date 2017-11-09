@@ -12,6 +12,11 @@ describe('number', () => {
       expect(number.range(3, 4)).to.deep.eq([3])
       expect(number.range(20, 23)).to.deep.eq([20, 21, 22])
     })
+
+    it('should return an empty array when using the same value', () => {
+      expect(number.range(3, 3)).to.deep.eq([])
+      expect(number.range(7, 7)).to.deep.eq([])
+    })
   })
 
   describe('times', () => {
