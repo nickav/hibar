@@ -1,6 +1,6 @@
 {
   "name": "hibar",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "The missing set of JavaScript functions",
   "main": "./lib",
   "repository": "https://github.com/nickaversano/hibar/issues",
