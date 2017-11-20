@@ -11,4 +11,13 @@ describe('object', () => {
       expect(copy.b).to.eq(test.b)
     })
   })
+
+  describe('merge', () => {
+    it('deeply merges objects', () => {
+      const o1 = { a: { b: 10 } }
+      const o2 = { a: { c: 4 } }
+      const expected = { a: { b: 10, c: 4 } }
+      expect(object.merge({}, o1, o2)).to.deep.eq(expected)
+    })
+  })
 })
