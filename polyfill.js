@@ -1,10 +1,3 @@
-const array = require('./lib/array')
-const fn = require('./lib/fn')
-const math = require('./lib/math')
-const number = require('./lib/number')
-const object = require('./lib/object')
-const string = require('./lib/string')
-
 /* */
 // Helpers
 
@@ -33,6 +26,13 @@ const register = (obj, vals) =>
 /* */
 // Polyfill
 module.exports = () => {
+  const array = require('./lib/array')
+  const fn = require('./lib/fn')
+  const math = require('./lib/math')
+  const number = require('./lib/number')
+  const object = require('./lib/object')
+  const string = require('./lib/string')
+
   /* */
   // Array
   register(Array, array)
