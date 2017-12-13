@@ -3,12 +3,28 @@ const { expect } = require('chai')
 
 describe('object', () => {
   describe('map', () => {
-    it('return a copy of the object', () => {
+    it('returns a copy of the object', () => {
       const test = { a: 1, b: 2 }
-      const copy = Object.map(test)
+      const copy = object.map(test)
       expect(copy).not.to.eq(test)
       expect(copy.a).to.eq(test.a)
       expect(copy.b).to.eq(test.b)
+    })
+  })
+
+  describe('mapKeys', () => {
+    it('works', () => {
+      const test = { a: 1, b: 2 }
+      const result = object.mapKeys(test, k => k + k)
+      expect(result).to.deep.eq({ aa: 1, bb: 2 })
+    })
+  })
+
+  describe('mapValues', () => {
+    it('works', () => {
+      const test = { a: 1, b: 2 }
+      const result = object.mapValues(test, v => v + v)
+      expect(result).to.deep.eq({ a: 2, b: 4 })
     })
   })
 

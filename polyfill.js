@@ -2,36 +2,28 @@
 // Helpers
 
 /** Auto-binds this as the first argument to fn. */
-const _this = fn =>
+const _this = func =>
   function() {
-    return fn.apply(this, [this].concat(Array.from(arguments)))
+    return func.apply(this, [this].concat(Array.from(arguments)))
   }
-
-/** Similar to Object assign, but won't overwrite existing properties. */
-const safeAssign = (obj, vals) =>
-  Object.keys(vals).forEach(key => {
-    if (!(key in obj)) obj[key] = vals[key]
-    else console.log(`Warning: could not overwrite ${obj} ${key}`)
-  })
 
 /**
  * Registers every method in vals to obj.
- * If object is a prototype, binds all methods to _this.
+ * Similar to Object.assign, but won't overwrite existing properties.
  */
-const register = (obj, vals) =>
-  typeof obj.hasOwnProperty('prototype')
-    ? safeAssign(obj, vals)
-    : safeAssign(obj, object.map(vals, (k, v) => _this(v)))
+const register = (obj, vals) => {
+  const bindThis = !obj.hasOwnProperty('prototype')
+
+  Object.keys(vals).forEach(key => {
+    if (!(key in obj)) obj[key] = bindThis ? _this(vals[key]) : vals[key]
+    else console.log(`Warning: could not overwrite ${obj} ${key}`)
+  })
+}
 
 /* */
 // Polyfill
 module.exports = () => {
-  const array = require('./lib/array')
-  const fn = require('./lib/fn')
-  const math = require('./lib/math')
-  const number = require('./lib/number')
-  const object = require('./lib/object')
-  const string = require('./lib/string')
+  const { array, fn, math, number, object, string } = require('./lib')
 
   /* */
   // Array
@@ -53,7 +45,7 @@ module.exports = () => {
   // forcibly overwrite built-in math functions
   Math.min = math.min
   Math.max = math.max
-  if (!Math.sign) Math.sign = math.sign
+  Math.sign = math.sign
 
   /* */
   // Number

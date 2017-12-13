@@ -38,5 +38,11 @@ describe('string', () => {
       const expected = 'Th qck brwn fx jmps vr th lzy dg'
       expect(string.replaceAll(str, /a|e|i|o|u/, '')).to.eq(expected)
     })
+
+    it('handles newlines', () => {
+      const str = 'Hello\nthere\n\ngood\nsir'
+      const expected = 'Hello there  good sir'
+      expect(string.replaceAll(str, '\n', ' ')).to.eq(expected)
+    })
   })
 })
