@@ -22,6 +22,7 @@ describe('polyfill', () => {
 
     it('binds methods to base classes', () => {
       expect(Object.pick({ a: 1, b: 2 }, ['a'])).to.deep.eq({ a: 1 })
+      expect(Math.approach(1, 2, 0.5)).to.eq(1.5)
     })
   })
 })

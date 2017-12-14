@@ -11,9 +11,7 @@ const _this = func =>
  * Registers every method in vals to obj.
  * Similar to Object.assign, but won't overwrite existing properties.
  */
-const register = (obj, vals) => {
-  const bindThis = !obj.hasOwnProperty('prototype')
-
+const register = (obj, vals, bindThis = false) => {
   Object.keys(vals).forEach(key => {
     if (!(key in obj)) obj[key] = bindThis ? _this(vals[key]) : vals[key]
     else console.log(`Warning: could not overwrite ${obj} ${key}`)
@@ -30,14 +28,15 @@ module.exports = () => {
   register(Array, array)
   register(
     Array.prototype,
-    object.pick(array, ['compact', 'choose', 'equals', 'groupBy'])
+    object.pick(array, ['compact', 'choose', 'equals', 'groupBy']),
+    true
   )
   Object.defineProperty(Array.prototype, 'first', { get: _this(array.first) })
   Object.defineProperty(Array.prototype, 'last', { get: _this(array.last) })
 
   /* */
   // Fn
-  register(Function.prototype, fn)
+  register(Function.prototype, fn, true)
 
   /* */
   // Math
@@ -59,5 +58,5 @@ module.exports = () => {
 
   /* */
   // String
-  register(String.prototype, string)
+  register(String.prototype, string, true)
 }
