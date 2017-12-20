@@ -20,43 +20,41 @@ const register = (obj, vals, bindThis = false) => {
 
 /* */
 // Polyfill
-module.exports = () => {
-  const { array, fn, math, number, object, string } = require('./lib')
+const { array, fn, math, number, object, string } = require('./lib')
 
-  /* */
-  // Array
-  register(Array, array)
-  register(
-    Array.prototype,
-    object.pick(array, ['compact', 'choose', 'equals', 'groupBy']),
-    true
-  )
-  Object.defineProperty(Array.prototype, 'first', { get: _this(array.first) })
-  Object.defineProperty(Array.prototype, 'last', { get: _this(array.last) })
+/* */
+// Array
+register(Array, array)
+register(
+  Array.prototype,
+  object.pick(array, ['compact', 'choose', 'equals', 'groupBy']),
+  true
+)
+Object.defineProperty(Array.prototype, 'first', { get: _this(array.first) })
+Object.defineProperty(Array.prototype, 'last', { get: _this(array.last) })
 
-  /* */
-  // Fn
-  register(Function.prototype, fn, true)
+/* */
+// Fn
+register(Function.prototype, fn, true)
 
-  /* */
-  // Math
-  register(Math, object.pluck(math, ['min', 'max', 'sign']))
-  // forcibly overwrite built-in math functions
-  Math.min = math.min
-  Math.max = math.max
-  Math.sign = math.sign
+/* */
+// Math
+register(Math, object.pluck(math, ['min', 'max', 'sign']))
+// forcibly overwrite built-in math functions
+Math.min = math.min
+Math.max = math.max
+Math.sign = math.sign
 
-  /* */
-  // Number
-  register(Number, number)
-  Number.prototype.to = _this(number.range)
-  Number.prototype.times = _this(number.times)
+/* */
+// Number
+register(Number, number)
+Number.prototype.to = _this(number.range)
+Number.prototype.times = _this(number.times)
 
-  /* */
-  // Object
-  register(Object, object)
+/* */
+// Object
+register(Object, object)
 
-  /* */
-  // String
-  register(String.prototype, string, true)
-}
+/* */
+// String
+register(String.prototype, string, true)

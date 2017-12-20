@@ -15,7 +15,7 @@ There are two ways of using it:
 ### Polyfill
 
 ```javascript
-require('hibar/polyfill')();
+require('hibar/polyfill')
 console.log(Math.clamp(0, 1, 2))
 ```
 
@@ -25,15 +25,14 @@ them see [./lib/polyfill.js](./lib/polyfill.js).
 ### Manually
 
 If you'd prefer not to override the base JavaScript classes, you can import
-and invoke the methods manually:
+and invoke these methods manually:
 
 ```javascript
-const array = require('hibar/array')
-// const { array } = require('hibar')
+const { array } = require('hibar')
 console.log(array.equals([1], [1]))
 ```
 
-Or
+Or:
 
 ```javascript
 const _ = require('hibar')

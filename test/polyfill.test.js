@@ -1,9 +1,7 @@
-const polyfill = require('../polyfill')
 const { expect } = require('chai')
+require('../polyfill')
 
 describe('polyfill', () => {
-  before(polyfill)
-
   describe('bindings', () => {
     it('binds explicitly bounds methods correctly', () => {
       const n = 3
