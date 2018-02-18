@@ -24,7 +24,9 @@ const { array, fn, math, number, object, string } = require('./lib')
 
 /* */
 // Array
+console.log('array')
 register(Array, array)
+console.log('fn')
 register(
   Array.prototype,
   object.pick(array, ['compact', 'choose', 'equals', 'groupBy']),
