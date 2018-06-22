@@ -1,7 +1,5 @@
 /node_modules/
-bin/*
+lib
 .DS_Store
-.env
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+*-debug.log*
+*-error.log*

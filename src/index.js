@@ -12,7 +12,7 @@ const libs = {
 
 function muxCreater(key) {
   return function muxer() {
-    const type = identity.typeof(arguments[0])
+    const type = identity.typeOf(arguments[0])
     const mapping = { function: 'fn' }
     const libType = type in mapping ? mapping[type] : type
     const dynamicLib = libs[libType] || {}
