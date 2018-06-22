@@ -2,6 +2,8 @@
 // Constants
 const DEGREES_TO_RADIANS = Math.PI / 180
 const RADIANS_TO_DEGREES = 180 / Math.PI
+const Math_min = Math.min
+const Math_max = Math.max
 
 /* */
 // Helpers
@@ -12,7 +14,7 @@ function arrayArgs(args) {
     : arguments
 }
 
-function wrap(fn) {
+function maybeArrayArgs(fn) {
   return function wrappedFn() {
     const args =
       arguments.length === 1 && Array.isArray(arguments[0])
@@ -96,7 +98,7 @@ export function choose() {
  * min(1, 2, 3) // returns 1
  * min([0, 1, 2, 3]) // returns 0
  */
-export const min = wrap(Math.min)
+export const min = maybeArrayArgs(Math_min)
 
 /**
  * Wrapper for Math.max that can be passed either an array of numbers or The
@@ -110,7 +112,7 @@ export const min = wrap(Math.min)
  * max(1, 2, 3) // returns 3
  * max([0, 1, 2, 4]) // returns 4
  */
-export const max = wrap(Math.max)
+export const max = maybeArrayArgs(Math_max)
 
 /**
  * Returns a value between min and max (inclusive).

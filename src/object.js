@@ -21,7 +21,7 @@ export const filter = (obj, fn) =>
  * @param {object} obj
  * @return {object} Without falsy values.
  */
-export const compact = obj => object.filter(obj, (k, v) => v)
+export const compact = obj => filter(obj, (k, v) => v)
 
 /**
  * Returns a copy of obj with only keys.
@@ -42,7 +42,7 @@ export const pick = (obj, keys) =>
  * @param {array} excludeKeys - keys to exclude
  */
 export const pluck = (obj, excludeKeys) =>
-  object.filter(obj, k => !excludeKeys.includes(k))
+  filter(obj, k => !excludeKeys.includes(k))
 
 /**
  * Shallow object diff, favors o2 on mismatch.
