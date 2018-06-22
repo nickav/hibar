@@ -13,7 +13,11 @@ const _this = func =>
  */
 const register = (obj, vals, bindThis = false) => {
   Object.keys(vals).forEach(key => {
-    if (!(key in obj)) obj[key] = bindThis ? _this(vals[key]) : vals[key]
+    if (!(key in obj))
+      Object.defineProperty(obj, key, {
+        enumerable: false,
+        value: bindThis ? _this(vals[key]) : vals[key]
+      })
     else console.log(`Warning: could not overwrite ${obj} ${key}`)
   })
 }
@@ -24,9 +28,7 @@ const { array, fn, math, number, object, string } = require('./lib')
 
 /* */
 // Array
-console.log('array')
 register(Array, array)
-console.log('fn')
 register(
   Array.prototype,
   object.pick(array, ['compact', 'choose', 'equals', 'groupBy']),
