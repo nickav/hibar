@@ -223,7 +223,7 @@ export const degtorad = deg => deg * DEGREES_TO_RADIANS
  * @param {number} y2
  * @return {number} The angle, in radians.
  */
-export const angleBetween = (x1, y1, x2, y2) => Math.acos(y2 - y1, x2 - x1)
+export const angleBetween = (x1, y1, x2, y2) => Math.atan2(y1 - y2, x2 - x1)
 
 /**
  * Returns the euclidian distance between the two given set of coordinates.
@@ -235,9 +235,8 @@ export const angleBetween = (x1, y1, x2, y2) => Math.acos(y2 - y1, x2 - x1)
  * @return {number} The distance between the two sets of coordinates.
  */
 export function distance(x1, y1, x2, y2) {
-  var dx = x1 - x2
-  var dy = y1 - y2
-
+  const dx = x1 - x2
+  const dy = y1 - y2
   return Math.sqrt(dx * dx + dy * dy)
 }
 
@@ -252,9 +251,8 @@ export function distance(x1, y1, x2, y2) {
  * @return {number} The distance squared between the two sets of coordinates.
  */
 export function distanceSquared(x1, y1, x2, y2) {
-  var dx = x1 - x2
-  var dy = y1 - y2
-
+  const dx = x1 - x2
+  const dy = y1 - y2
   return dx * dx + dy * dy
 }
 
@@ -264,7 +262,7 @@ export function distanceSquared(x1, y1, x2, y2) {
  * @param {number} n
  * @param {number} digits - number of decimal digits
  */
-export const decimals = (n, digits) => {
+export function decimals(n, digits) {
   const factor = Math.pow(10, digits)
   return Math.round(n * factor) / factor
 }
