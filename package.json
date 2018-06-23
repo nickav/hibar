@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": false,
   "main": "./lib",
-  "files": ["lib"],
+  "files": ["lib", "polyfill.js"],
   "scripts": {
     "format":
       "yarn f $(git ls-files -c -m | grep '\\.\\(jsx\\?\\|json\\|scss\\)$' | tr '\n' ' ')",
