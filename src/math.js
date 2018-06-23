@@ -9,9 +9,7 @@ const Math_max = Math.max
 // Helpers
 
 function arrayArgs(args) {
-  return arguments.length === 1 && Array.isArray(arguments[0])
-    ? arguments[0]
-    : arguments
+  return args.length === 1 && Array.isArray(args[0]) ? args[0] : args
 }
 
 function maybeArrayArgs(fn) {
