@@ -11,8 +11,7 @@
   "scripts": {
     "format":
       "yarn f $(git ls-files -c -m | grep '\\.\\(jsx\\?\\|json\\|scss\\)$' | tr '\n' ' ')",
-    "f":
-      "node_modules/.bin/prettier --single-quote --write --tab-width=2 --no-semi",
+    "f": "node_modules/.bin/prettier --config .prettierrc --write",
     "lib": "babel src --out-dir lib --source-maps",
     "test": "mocha",
     "precommit": "lint-staged",

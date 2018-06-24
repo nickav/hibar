@@ -12,7 +12,7 @@ export const slugify = str =>
     .replace(/[^\w\-]+/g, '')
     .replace(/\-\-+/g, '-')
     .replace(/^-+/, '')
-    .replace(/-+$/, '')
+    .replace(/-+$/, '');
 
 /**
  * Capitalizes the first letter in the string.
@@ -23,7 +23,7 @@ export const slugify = str =>
  * @return {string}
  */
 export const capitalize = str =>
-  (str || '').charAt(0).toUpperCase() + (str || '').slice(1)
+  (str || '').charAt(0).toUpperCase() + (str || '').slice(1);
 
 /**
  * Capitalizes the first letter of each word in the string.
@@ -37,7 +37,7 @@ export const titlecase = str =>
   (str || '').replace(
     /\w\S*/g,
     s => s.charAt(0).toUpperCase() + s.substr(1).toLowerCase()
-  )
+  );
 
 /**
  * Replaces every occurance of search with replace found in str.
@@ -48,7 +48,7 @@ export const titlecase = str =>
  * @return {string}
  */
 export const replaceAll = (str, search, replace) =>
-  (str || '').split(search).join(replace)
+  (str || '').split(search).join(replace);
 
 /**
  * Returns an array of all matches found in str using regex.
@@ -58,12 +58,12 @@ export const replaceAll = (str, search, replace) =>
  * @return {Array[Array]} array of matches
  */
 export const matchAll = (str, regex) => {
-  if (!regex.global) return [str.match(regex)]
+  if (!regex.global) return [str.match(regex)];
 
   let match,
-    output = []
+    output = [];
   while ((match = regex.exec(str))) {
-    output.push(match)
+    output.push(match);
   }
-  return output
-}
+  return output;
+};

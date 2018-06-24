@@ -5,11 +5,11 @@
  * @param {function} keyFn - given the arguments, returns the cache key
  */
 export function memoize(func, keyFn = args => JSON.stringify(args)) {
-  const memo = {}
+  const memo = {};
   return function() {
-    const key = keyFn(arguments)
-    return key in memo ? memo[key] : (memo[key] = func.apply(this, arguments))
-  }
+    const key = keyFn(arguments);
+    return key in memo ? memo[key] : (memo[key] = func.apply(this, arguments));
+  };
 }
 
 /**
@@ -18,24 +18,24 @@ export function memoize(func, keyFn = args => JSON.stringify(args)) {
 export function maybe(fn) {
   return function(...args) {
     if (args.length === 0) {
-      return
+      return;
     }
     for (let arg of args) {
-      if (arg == null) return
+      if (arg == null) return;
     }
-    return fn.apply(this, args)
-  }
+    return fn.apply(this, args);
+  };
 }
 
 /**
  * Only allows fn to be invoked once.
  */
 export function once(fn) {
-  let done = false
+  let done = false;
 
   return function() {
-    return done ? void 0 : ((done = true), fn.apply(this, arguments))
-  }
+    return done ? void 0 : ((done = true), fn.apply(this, arguments));
+  };
 }
 
 /**
@@ -50,14 +50,14 @@ export function once(fn) {
  */
 export function compose(...funcs) {
   if (funcs.length === 0) {
-    return arg => arg
+    return arg => arg;
   }
 
   if (funcs.length === 1) {
-    return funcs[0]
+    return funcs[0];
   }
 
-  return funcs.reduce((a, b) => (...args) => a(b(...args)))
+  return funcs.reduce((a, b) => (...args) => a(b(...args)));
 }
 
 /**
@@ -70,14 +70,14 @@ export function compose(...funcs) {
  */
 export function pipe(...funcs) {
   if (funcs.length === 0) {
-    return arg => arg
+    return arg => arg;
   }
 
   if (funcs.length === 1) {
-    return funcs[0]
+    return funcs[0];
   }
 
-  return value => funcs.reduce((acc, fn) => fn(acc), value)
+  return value => funcs.reduce((acc, fn) => fn(acc), value);
 }
 
 /**
@@ -91,4 +91,4 @@ export function pipe(...funcs) {
 export const promisify = fn => (...args) =>
   new Promise((resolve, reject) =>
     fn(...args.concat((err, ...rest) => (err ? reject(err) : resolve(...rest))))
-  )
+  );

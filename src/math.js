@@ -1,15 +1,15 @@
 /* */
 // Constants
-const DEGREES_TO_RADIANS = Math.PI / 180
-const RADIANS_TO_DEGREES = 180 / Math.PI
-const Math_min = Math.min
-const Math_max = Math.max
+const DEGREES_TO_RADIANS = Math.PI / 180;
+const RADIANS_TO_DEGREES = 180 / Math.PI;
+const Math_min = Math.min;
+const Math_max = Math.max;
 
 /* */
 // Helpers
 
 function arrayArgs(args) {
-  return args.length === 1 && Array.isArray(args[0]) ? args[0] : args
+  return args.length === 1 && Array.isArray(args[0]) ? args[0] : args;
 }
 
 function maybeArrayArgs(fn) {
@@ -17,9 +17,9 @@ function maybeArrayArgs(fn) {
     const args =
       arguments.length === 1 && Array.isArray(arguments[0])
         ? arguments[0]
-        : arguments
-    return fn.apply(null, args)
-  }
+        : arguments;
+    return fn.apply(null, args);
+  };
 }
 
 /**
@@ -29,7 +29,7 @@ function maybeArrayArgs(fn) {
  * @return {number} - a positive number, or 0
  */
 export function abs(x) {
-  return x < 0 ? -x : x > 0 ? x : 0
+  return x < 0 ? -x : x > 0 ? x : 0;
 }
 
 /**
@@ -46,11 +46,11 @@ export function abs(x) {
  */
 export function random(min = 0, max = 1) {
   if (arguments.length === 1) {
-    max = min
-    min = 0
+    max = min;
+    min = 0;
   }
 
-  return Math.random() * (max - min) + min
+  return Math.random() * (max - min) + min;
 }
 
 /**
@@ -66,7 +66,7 @@ export function random(min = 0, max = 1) {
  * random(5, 10) // random integer between 5 and 10
  */
 export function randomInt() {
-  return ~~random.apply(null, arguments)
+  return ~~random.apply(null, arguments);
 }
 
 /**
@@ -81,8 +81,8 @@ export function randomInt() {
  * choose([1, 2, 3]) // returns one of the values in the array randomly
  */
 export function choose() {
-  const data = arrayArgs(arguments)
-  return data[~~(Math.random() * data.length)]
+  const data = arrayArgs(arguments);
+  return data[~~(Math.random() * data.length)];
 }
 
 /**
@@ -96,7 +96,7 @@ export function choose() {
  * min(1, 2, 3) // returns 1
  * min([0, 1, 2, 3]) // returns 0
  */
-export const min = maybeArrayArgs(Math_min)
+export const min = maybeArrayArgs(Math_min);
 
 /**
  * Wrapper for Math.max that can be passed either an array of numbers or The
@@ -110,7 +110,7 @@ export const min = maybeArrayArgs(Math_min)
  * max(1, 2, 3) // returns 3
  * max([0, 1, 2, 4]) // returns 4
  */
-export const max = maybeArrayArgs(Math_max)
+export const max = maybeArrayArgs(Math_max);
 
 /**
  * Returns a value between min and max (inclusive).
@@ -121,7 +121,7 @@ export const max = maybeArrayArgs(Math_max)
  * @return {number} The clamped value.
  */
 export const clamp = (val, min, max) =>
-  val < min ? min : val > max ? max : val
+  val < min ? min : val > max ? max : val;
 
 /**
  * Ensures that the value always stays between min and max, by wrapping the
@@ -135,15 +135,15 @@ export const clamp = (val, min, max) =>
  * @return {number} The wrapped value.
  */
 export function wrap(value, min, max) {
-  const range = max - min
+  const range = max - min;
 
-  if (range <= 0) return 0
+  if (range <= 0) return 0;
 
-  var result = (value - min) % range
+  var result = (value - min) % range;
 
-  if (result < 0) result += range
+  if (result < 0) result += range;
 
-  return result + min
+  return result + min;
 }
 
 /**
@@ -154,7 +154,7 @@ export function wrap(value, min, max) {
  * @param {number} t - The percent to interpolate (typically between 0 and 1).
  * @return {number}
  */
-export const lerp = (a, b, t) => (b - a) * t + a
+export const lerp = (a, b, t) => (b - a) * t + a;
 
 /**
  * Ensures that a never is larger than b. If a is negative, it wraps around.
@@ -166,7 +166,7 @@ export const lerp = (a, b, t) => (b - a) * t + a
  * @param {number} b - The max value
  * @return {number}
  */
-export const mod = (a, b) => (a % b + b) % b
+export const mod = (a, b) => (a % b + b) % b;
 
 /**
  * Returns the sign of a number, indicating whether the number is positive,
@@ -175,7 +175,7 @@ export const mod = (a, b) => (a % b + b) % b
  * @param {number} x
  * @return {number} 1, -1 or 0
  */
-export const sign = x => (x > 0 ? 1 : x < 0 ? -1 : 0)
+export const sign = x => (x > 0 ? 1 : x < 0 ? -1 : 0);
 
 /**
  * Returns the result of either adding or subtracting by from n, until it
@@ -192,7 +192,7 @@ export const sign = x => (x > 0 ? 1 : x < 0 ? -1 : 0)
  * y = move(y, room.height / 2, speed)
  */
 export const move = (n, to, by = 1) =>
-  n < to ? Math.min(n + by, to) : Math.max(n - by, to)
+  n < to ? Math.min(n + by, to) : Math.max(n - by, to);
 
 /**
  * Converts a number from radians to degrees.
@@ -201,7 +201,7 @@ export const move = (n, to, by = 1) =>
  * @return {number} the number in degrees
  * @example degrees(PI) // returns 180
  */
-export const radtodeg = rad => rad * RADIANS_TO_DEGREES
+export const radtodeg = rad => rad * RADIANS_TO_DEGREES;
 
 /**
  * Converts a number from degrees to radians.
@@ -210,7 +210,7 @@ export const radtodeg = rad => rad * RADIANS_TO_DEGREES
  * @return {number} the number in radians
  * @example radians(180) // returns 3.14...
  */
-export const degtorad = deg => deg * DEGREES_TO_RADIANS
+export const degtorad = deg => deg * DEGREES_TO_RADIANS;
 
 /**
  * Find the angle of a segment from (x1, y1) -> (x2, y2).
@@ -221,7 +221,7 @@ export const degtorad = deg => deg * DEGREES_TO_RADIANS
  * @param {number} y2
  * @return {number} The angle, in radians.
  */
-export const angleBetween = (x1, y1, x2, y2) => Math.atan2(y1 - y2, x2 - x1)
+export const angleBetween = (x1, y1, x2, y2) => Math.atan2(y1 - y2, x2 - x1);
 
 /**
  * Returns the euclidian distance between the two given set of coordinates.
@@ -233,9 +233,9 @@ export const angleBetween = (x1, y1, x2, y2) => Math.atan2(y1 - y2, x2 - x1)
  * @return {number} The distance between the two sets of coordinates.
  */
 export function distance(x1, y1, x2, y2) {
-  const dx = x1 - x2
-  const dy = y1 - y2
-  return Math.sqrt(dx * dx + dy * dy)
+  const dx = x1 - x2;
+  const dy = y1 - y2;
+  return Math.sqrt(dx * dx + dy * dy);
 }
 
 /**
@@ -249,9 +249,9 @@ export function distance(x1, y1, x2, y2) {
  * @return {number} The distance squared between the two sets of coordinates.
  */
 export function distanceSquared(x1, y1, x2, y2) {
-  const dx = x1 - x2
-  const dy = y1 - y2
-  return dx * dx + dy * dy
+  const dx = x1 - x2;
+  const dy = y1 - y2;
+  return dx * dx + dy * dy;
 }
 
 /**
@@ -261,6 +261,6 @@ export function distanceSquared(x1, y1, x2, y2) {
  * @param {number} digits - number of decimal digits
  */
 export function decimals(n, digits) {
-  const factor = Math.pow(10, digits)
-  return Math.round(n * factor) / factor
+  const factor = Math.pow(10, digits);
+  return Math.round(n * factor) / factor;
 }
