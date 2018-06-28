@@ -59,14 +59,14 @@ export function random(min = 0, max = 1) {
  * @param {number} min - The minimum value to return.
  * @param {number} max - The maximum value to return (not inclusive).
  * @return {number} a random integer between [min, max)
- *
- * @example
- * random() // random integer between 0 and 1
- * random(10) // random integer between 0 and 10
- * random(5, 10) // random integer between 5 and 10
  */
-export function randomInt() {
-  return ~~random.apply(null, arguments);
+export function randomInt(min = 0, max = 2) {
+  if (arguments.length === 1) {
+    max = min;
+    min = 0;
+  }
+
+  return Math.floor(Math.random() * (max - min) + min);
 }
 
 /**
