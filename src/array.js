@@ -27,7 +27,7 @@ export const flatten = arrs => Array.prototype.concat.apply([], arrs);
  * @param {Array} arr2
  * @return {boolean} true if arrays are equal
  */
-export function equals(arr1, arr2) {
+export const equals = (arr1, arr2) => {
   if (a === b) return true;
   if (a == null || b == null) return false;
   if (a.length !== b.length) return false;
@@ -36,7 +36,7 @@ export function equals(arr1, arr2) {
     if (a[i] !== b[i]) return false;
   }
   return true;
-}
+};
 
 /**
  * Returns array with any duplicates removed.
@@ -83,6 +83,20 @@ export const groupBy = (arr, fn) =>
     (rv[fn(x, i, a)] = rv[fn(x, i, a)] || []).push(x);
     return rv;
   }, {});
+
+export const collect = (arr, equals = () => false) =>
+  arr.reduce((result, curr, i, arr) => {
+    const group = result[result.length - 1];
+    const prev = group[group.length - 1];
+
+    if (equals(prev, curr, group, i, arr)) {
+      group.push(curr);
+    } else {
+      result.push([curr]);
+    }
+
+    return result;
+  }, arr.length ? [[arr[0]]] : []);
 
 /**
  * Alias for math#choose

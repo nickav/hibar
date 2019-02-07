@@ -92,3 +92,20 @@ export const promisify = fn => (...args) =>
   new Promise((resolve, reject) =>
     fn(...args.concat((err, ...rest) => (err ? reject(err) : resolve(...rest))))
   );
+
+/** Source: https://davidwalsh.name/javascript-debounce-function */
+export const debounce = (func, wait, immediate) => {
+  let timeout;
+  return function() {
+    let context = this;
+    let args = arguments;
+    let later = function() {
+      timeout = null;
+      if (!immediate) func.apply(context, args);
+    };
+    let callNow = immediate && !timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+    if (callNow) func.apply(context, args);
+  };
+};
