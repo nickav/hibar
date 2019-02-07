@@ -7,21 +7,20 @@ const libs = {
   math: require('./math'),
   number: require('./number'),
   object: require('./object'),
-  string: require('./string')
+  string: require('./string'),
 };
 
-function muxCreater(key) {
-  return function muxer() {
-    const type = identity.typeOf(arguments[0]);
-    const mapping = { function: 'fn' };
-    const libType = type in mapping ? mapping[type] : type;
+const muxCreater = key => {
+  const typeMapping = { function: 'fn' };
+
+  return (...args) => {
+    const type = identity.typeOf(args[0]);
+    const libType = type in typeMapping ? typeMapping[type] : type;
     const dynamicLib = libs[libType] || {};
 
-    return key in dynamicLib
-      ? dynamicLib[key].apply(null, arguments)
-      : undefined;
+    return key in dynamicLib ? dynamicLib[key].apply(null, args) : undefined;
   };
-}
+};
 
 const hibar = Object.entries(libs).reduce((memo, [key, lib]) => {
   Object.entries(libs[key]).forEach(([libKey, libFn]) => {
@@ -30,4 +29,4 @@ const hibar = Object.entries(libs).reduce((memo, [key, lib]) => {
   return memo;
 }, {});
 
-module.exports = Object.assign({}, hibar, libs);
+module.exports = { ...hibar, ...libs };

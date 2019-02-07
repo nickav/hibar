@@ -8,19 +8,10 @@ const Math_max = Math.max;
 /* */
 // Helpers
 
-function arrayArgs(args) {
-  return args.length === 1 && Array.isArray(args[0]) ? args[0] : args;
-}
+const arrayArgs = args =>
+  args.length === 1 && Array.isArray(args[0]) ? args[0] : args;
 
-function maybeArrayArgs(fn) {
-  return function wrappedFn() {
-    const args =
-      arguments.length === 1 && Array.isArray(arguments[0])
-        ? arguments[0]
-        : arguments;
-    return fn.apply(null, args);
-  };
-}
+const withArrayArgs = fn => (...args) => fn.apply(null, arrayArgs(args));
 
 /**
  * Returns the absolute value of a number.
@@ -28,9 +19,7 @@ function maybeArrayArgs(fn) {
  * @param {number} x - the number
  * @return {number} - a positive number, or 0
  */
-export function abs(x) {
-  return x < 0 ? -x : x > 0 ? x : 0;
-}
+export const abs = x => (x < 0 ? -x : x > 0 ? x : 0);
 
 /**
  * Get a random number between min and max (not including max).
@@ -80,10 +69,10 @@ export function randomInt(min = 0, max = 2) {
  * choose(1, 2, 3) // returns one of the arguments randomly
  * choose([1, 2, 3]) // returns one of the values in the array randomly
  */
-export function choose() {
-  const data = arrayArgs(arguments);
+export const choose = (...args) => {
+  const data = arrayArgs(args);
   return data[~~(Math.random() * data.length)];
-}
+};
 
 /**
  * Wrapper for Math.min that can be passed either an array of numbers or the
@@ -96,7 +85,7 @@ export function choose() {
  * min(1, 2, 3) // returns 1
  * min([0, 1, 2, 3]) // returns 0
  */
-export const min = maybeArrayArgs(Math_min);
+export const min = withArrayArgs(Math_min);
 
 /**
  * Wrapper for Math.max that can be passed either an array of numbers or The
@@ -110,7 +99,7 @@ export const min = maybeArrayArgs(Math_min);
  * max(1, 2, 3) // returns 3
  * max([0, 1, 2, 4]) // returns 4
  */
-export const max = maybeArrayArgs(Math_max);
+export const max = withArrayArgs(Math_max);
 
 /**
  * Returns a value between min and max (inclusive).
@@ -134,17 +123,17 @@ export const clamp = (val, min, max) =>
  * @param {number} max - The maximum, should be larger than `min`.
  * @return {number} The wrapped value.
  */
-export function wrap(value, min, max) {
+export const wrap = (value, min, max) => {
   const range = max - min;
 
   if (range <= 0) return 0;
 
-  var result = (value - min) % range;
+  let result = (value - min) % range;
 
   if (result < 0) result += range;
 
   return result + min;
-}
+};
 
 /**
  * Calculates a linear (interpolation) value over t.
@@ -232,11 +221,11 @@ export const angleBetween = (x1, y1, x2, y2) => Math.atan2(y1 - y2, x2 - x1);
  * @param {number} y2
  * @return {number} The distance between the two sets of coordinates.
  */
-export function distance(x1, y1, x2, y2) {
+export const distance = (x1, y1, x2, y2) => {
   const dx = x1 - x2;
   const dy = y1 - y2;
   return Math.sqrt(dx * dx + dy * dy);
-}
+};
 
 /**
  * Returns the euclidean distance squared between the two given set of
@@ -248,11 +237,11 @@ export function distance(x1, y1, x2, y2) {
  * @param {number} y2
  * @return {number} The distance squared between the two sets of coordinates.
  */
-export function distanceSquared(x1, y1, x2, y2) {
+export const distanceSquared = (x1, y1, x2, y2) => {
   const dx = x1 - x2;
   const dy = y1 - y2;
   return dx * dx + dy * dy;
-}
+};
 
 /**
  * Truncates n and keeps up to decimal digits.
@@ -260,7 +249,7 @@ export function distanceSquared(x1, y1, x2, y2) {
  * @param {number} n
  * @param {number} digits - number of decimal digits
  */
-export function decimals(n, digits) {
+export const decimals = (n, digits) => {
   const factor = Math.pow(10, digits);
   return Math.round(n * factor) / factor;
-}
+};

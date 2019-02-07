@@ -11,7 +11,7 @@
   "scripts": {
     "format":
       "yarn f $(git ls-files -c -m | grep '\\.\\(jsx\\?\\|json\\|scss\\)$' | tr '\n' ' ')",
-    "f": "node_modules/.bin/prettier --config .prettierrc --write",
+    "f": "node_modules/.bin/prettier --config package.json --write",
     "lib": "babel src --out-dir lib --source-maps",
     "test": "mocha",
     "precommit": "lint-staged",
@@ -24,12 +24,18 @@
     "lodash.merge": "^4.6.0"
   },
   "devDependencies": {
-    "babel-core": "^6.24.1",
-    "babel-preset-env": "^1.7.0",
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
     "chai": "^4.1.2",
     "husky": "^0.14.3",
     "lint-staged": "^4.3.0",
     "mocha": "^4.0.1",
     "prettier": "^1.8.1"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "es5"
   }
 }

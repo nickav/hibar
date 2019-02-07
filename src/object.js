@@ -103,11 +103,11 @@ export { merge };
  * @param {object} o2
  * @return {boolean}
  */
-export function equals(o1, o2) {
+export const equals = (o1, o2) => {
   const keys1 = Object.keys(o1);
   return (
     o1 === o2 ||
     (keys1.length === Object.keys(o2).length &&
       keys1.every(key => o1[key] === o2[key]))
   );
-}
+};

@@ -4,39 +4,41 @@
  * @param {function} func
  * @param {function} keyFn - given the arguments, returns the cache key
  */
-export function memoize(func, keyFn = args => JSON.stringify(args)) {
+export const memoize = (func, keyFn = args => JSON.stringify(args)) => {
   const memo = {};
-  return function() {
-    const key = keyFn(arguments);
-    return key in memo ? memo[key] : (memo[key] = func.apply(this, arguments));
+  return (...args) => {
+    const key = keyFn(args);
+    return key in memo ? memo[key] : (memo[key] = func.apply(null, args));
   };
-}
+};
 
 /**
  * Ensures every argument to fn is truthy, otherwise fn will not be invoked.
  */
-export function maybe(fn) {
-  return function(...args) {
+export const maybe = fn => {
+  return (...args) => {
     if (args.length === 0) {
       return;
     }
+
     for (let arg of args) {
       if (arg == null) return;
     }
-    return fn.apply(this, args);
+
+    return fn.apply(null, args);
   };
-}
+};
 
 /**
  * Only allows fn to be invoked once.
  */
-export function once(fn) {
+export const once = fn => {
   let done = false;
 
-  return function() {
-    return done ? void 0 : ((done = true), fn.apply(this, arguments));
+  return (...args) => {
+    return done ? void 0 : ((done = true), fn.apply(null, args));
   };
-}
+};
 
 /**
  * Composes single-argument functions from right to left. The rightmost
@@ -48,7 +50,7 @@ export function once(fn) {
  * from right to left. For example, compose(f, g, h) is identical to doing
  * (...args) => f(g(h(...args))).
  */
-export function compose(...funcs) {
+export const compose = (...funcs) => {
   if (funcs.length === 0) {
     return arg => arg;
   }
@@ -58,7 +60,7 @@ export function compose(...funcs) {
   }
 
   return funcs.reduce((a, b) => (...args) => a(b(...args)));
-}
+};
 
 /**
  * Opposite of compose. Calls each function in order.
@@ -68,7 +70,7 @@ export function compose(...funcs) {
  * from left to right. For example, pipe(f, g, h) is identical to doing
  * (...args) => h(g(f(...args))).
  */
-export function pipe(...funcs) {
+export const pipe = (...funcs) => {
   if (funcs.length === 0) {
     return arg => arg;
   }
@@ -78,7 +80,7 @@ export function pipe(...funcs) {
   }
 
   return value => funcs.reduce((acc, fn) => fn(acc), value);
-}
+};
 
 /**
  * Converts a node-styled callback function into a promise.
@@ -96,16 +98,14 @@ export const promisify = fn => (...args) =>
 /** Source: https://davidwalsh.name/javascript-debounce-function */
 export const debounce = (func, wait, immediate) => {
   let timeout;
-  return function() {
-    let context = this;
-    let args = arguments;
-    let later = function() {
+  return (...args) => {
+    const later = () => {
       timeout = null;
-      if (!immediate) func.apply(context, args);
+      if (!immediate) func.apply(null, args);
     };
-    let callNow = immediate && !timeout;
+    const callNow = immediate && !timeout;
     clearTimeout(timeout);
     timeout = setTimeout(later, wait);
-    if (callNow) func.apply(context, args);
+    if (callNow) func.apply(null, args);
   };
 };
