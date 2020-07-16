@@ -85,8 +85,8 @@ export const groupBy = (arr, fn) =>
     return rv;
   }, {});
 
-export const collect = (arr, equals = () => false) =>
-  arr.reduce((result, curr, i, arr) => {
+export const collect = (arr, equals = (a, b) => false) =>
+  arr.slice(1).reduce((result, curr, i, arr) => {
     const group = result[result.length - 1];
     const prev = group[group.length - 1];
 
