@@ -103,3 +103,13 @@ export const collect = (arr, equals = (a, b) => false) =>
  * Alias for math#choose
  */
 export const sample = arr => choose(arr);
+
+export const chunk = (array, size) => {
+  const result = [];
+  let index = 0;
+  while (index < array.length) {
+    result.push(array.slice(index, size + index));
+    index += size;
+  }
+  return result;
+};
